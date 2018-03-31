@@ -44,6 +44,15 @@ class MyCoTransform(object):
     def __call__(self, input, target):
         # do something to both images
         input =  Resize(self.height, Image.BILINEAR)(input)
+
+        # grayscale img
+        input = input.convert('L')
+
+        # convert back to 3 channels
+        input = Image.merge("RGB", (input, input, input))
+        # print(input)
+        # input.save("test.png")
+
         target = Resize(self.height, Image.NEAREST)(target)
 
         if(self.augment):
@@ -224,6 +233,7 @@ def train(args, model, enc=False):
                 labels = labels.cuda()
 
             inputs = Variable(images)
+            # print(inputs)
             targets = Variable(labels)
             outputs = model(inputs, only_encode=enc)
 

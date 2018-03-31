@@ -7,3 +7,8 @@
 eval/save_results/
 eval/save_color/
 save/
+cityscape/
+bw_cityscape/
+bw_model/
+notes.txt
+*.png
